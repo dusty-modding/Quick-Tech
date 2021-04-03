@@ -1,0 +1,12 @@
+{
+  "name": "Quick-Tech",
+  "version": "0.1.0",
+  "title": "Quick Tech",
+  "author": "killparadise",
+  "homepage": "https://github.com/dusty-modding/Quick-Tech",
+  "factorio_version": "1.1",
+  "dependencies": [
+    "base >= 1.0"
+  ],
+  "description": "A quick tech mod to jump start your tech life"
+}
