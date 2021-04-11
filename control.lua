@@ -1,25 +1,41 @@
-require('configs.bobs')
+require('configs.build')
+require('libs.utils')
 
 function on_player_creation(player)
   local technologies = {
     'automation',
-    'basic-electronics',
-    'basic-logistics',
-    'basic-military',
-    'basic-mining',
-    'basic-optics',
+    'military',
+    'electronics',
+    'optics',
     'logistics',
-    'stone-wall'
+    'gate',
+    'landfill',
+    'steel-processing',
+    'logistic-science-pack',
+    'gun-turret',
+    'steel-axe',
+    'fast-inserter',
+    'stone-wall',
+    'toolbelt'
   }
 
-  if game.active_mods['bobassembly'] then
-    technologies = populateBobTech(technologies)
+  technologies = concatLists(technologies, buildConfig(player.mod_settings, {
+    'BigBags',
+    'bobassembly',
+    'boblogistics',
+    'bobplates',
+    'epic_mining_and_crafting_speed_research'
+  }))
+
+  for i, v in pairs(technologies) do
+    local tech = player.force.technologies[v]
+
+    if tech.enabled then
+      tech.researched = true
+    end
   end
 
-  for _, v in ipairs(technologies) do
-    player.print('Technology = ' .. v)
-    player.force.technologies[v].researched = true
-  end
+  player.print('QT Finished Research')
 end
 
 -- fires on the end of the cutscene (singleplayer)
